@@ -11,6 +11,7 @@ https://medium.com/@joeclever/using-multiple-datasources-with-spring-boot-and-sp
 THIS IS SIMPLY A SPRING APPLLICATION WHICH CAN CONNECT WITH MULTIPLE SCHEMAS AT ONE TIME
 
 <b>This will work only with Mysql Databse <br>
+<b>This does not contain any Security related stuff ,above links can be expolered as per requirement <br>
   
   
 Pre requsites :
@@ -23,9 +24,9 @@ End points for basic check
   
  1. http://localhost:8080/user/test1
   
- 2. http://localhost:8080/tencheck With Headers as below 
-  Content-Type : application/json
-  tenantId     : test1
+ 2. http://localhost:8080/tencheck With Headers as below  <br>
+  Content-Type : application/json  <br>
+  tenantId     : test1            <br>
   
   
 Databases 
