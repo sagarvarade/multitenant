@@ -1,10 +1,10 @@
 # multitenant
-This is to connect to multiple dbs in one spring application 
-With help of below link :
-https://github.com/sumanentc/multitenant
-https://github.com/sunitk/multitenancy-dynamic-tenant
-https://medium.com/@paulushc/multi-database-application-with-spring-boot-777aaf5a1e4e
-https://medium.com/@joeclever/using-multiple-datasources-with-spring-boot-and-spring-data-6430b00c02e7
+This is to connect to multiple dbs in one spring application <br>
+With help of below link : <br>
+https://github.com/sumanentc/multitenant   <br>
+https://github.com/sunitk/multitenancy-dynamic-tenant <br>
+https://medium.com/@paulushc/multi-database-application-with-spring-boot-777aaf5a1e4e   <br>
+https://medium.com/@joeclever/using-multiple-datasources-with-spring-boot-and-spring-data-6430b00c02e7  <br>
 
 ********************************************************************************************************
 
@@ -36,5 +36,13 @@ Databases
 4. test3
  
   
+Public Schema have configuration as belew for each schema that can be used in this Application: <br>
+|_. id |_. password |_. tenantId |_. url |_. username |_. version | <br>
+| 1 | sagar | test1 | jdbc:mysql://192.168.1.100:3306/test1 | sagar | 0 |<br>
+| 2 | sagar | test2 | jdbc:mysql://192.168.1.100:3306/test2 | sagar | 0 |<br>
+| 3 | sagar | test3 | jdbc:mysql://192.168.1.100:3306/test3 | sagar | 0 |<br>
   
+
+
+
 
