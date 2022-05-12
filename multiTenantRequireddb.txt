@@ -1,0 +1,269 @@
+-- --------------------------------------------------------
+-- Host:                         127.0.0.1
+-- Server version:               8.0.28 - MySQL Community Server - GPL
+-- Server OS:                    Win64
+-- HeidiSQL Version:             12.0.0.6468
+-- --------------------------------------------------------
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+
+-- Dumping database structure for public
+DROP DATABASE IF EXISTS `public`;
+CREATE DATABASE IF NOT EXISTS `public` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `public`;
+
+-- Dumping structure for table public.city
+DROP TABLE IF EXISTS `city`;
+CREATE TABLE IF NOT EXISTS `city` (
+  `id` bigint DEFAULT NULL,
+  `name` varchar(200) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Dumping data for table public.city: ~1 rows (approximately)
+DELETE FROM `city`;
+INSERT INTO `city` (`id`, `name`) VALUES
+	(1, 'Mumbaiiiiiii');
+
+-- Dumping structure for table public.datasourceconfig
+DROP TABLE IF EXISTS `datasourceconfig`;
+CREATE TABLE IF NOT EXISTS `datasourceconfig` (
+  `id` bigint NOT NULL,
+  `driverclassname` varchar(255) DEFAULT NULL,
+  `url` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `username` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `initialize` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Dumping data for table public.datasourceconfig: ~2 rows (approximately)
+DELETE FROM `datasourceconfig`;
+INSERT INTO `datasourceconfig` (`id`, `driverclassname`, `url`, `name`, `username`, `password`, `initialize`) VALUES
+	(1, 'com.mysql.cj.jdbc.Driver', 'jdbc:mysql://192.168.1.100:3306/test1', 'test1', 'sagar', 'sagar', 1),
+	(2, 'com.mysql.cj.jdbc.Driver', 'jdbc:mysql://192.168.1.100:3306/test2', 'test2', 'sagar', 'sagar', 1);
+
+-- Dumping structure for table public.master_tenant
+DROP TABLE IF EXISTS `master_tenant`;
+CREATE TABLE IF NOT EXISTS `master_tenant` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `password` varchar(255) DEFAULT NULL,
+  `tenantId` varchar(255) DEFAULT NULL,
+  `url` varchar(255) DEFAULT NULL,
+  `username` varchar(255) DEFAULT NULL,
+  `version` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Dumping data for table public.master_tenant: 3 rows
+DELETE FROM `master_tenant`;
+/*!40000 ALTER TABLE `master_tenant` DISABLE KEYS */;
+INSERT INTO `master_tenant` (`id`, `password`, `tenantId`, `url`, `username`, `version`) VALUES
+	(1, 'sagar', 'test1', 'jdbc:mysql://192.168.1.100:3306/test1', 'sagar', 0),
+	(2, 'sagar', 'test2', 'jdbc:mysql://192.168.1.100:3306/test2', 'sagar', 0),
+	(3, 'sagar', 'test3', 'jdbc:mysql://192.168.1.100:3306/test3', 'sagar', 0);
+/*!40000 ALTER TABLE `master_tenant` ENABLE KEYS */;
+
+
+-- Dumping database structure for test1
+DROP DATABASE IF EXISTS `test1`;
+CREATE DATABASE IF NOT EXISTS `test1` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `test1`;
+
+-- Dumping structure for table test1.city
+DROP TABLE IF EXISTS `city`;
+CREATE TABLE IF NOT EXISTS `city` (
+  `id` bigint DEFAULT NULL,
+  `name` varchar(200) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Dumping data for table test1.city: ~0 rows (approximately)
+DELETE FROM `city`;
+
+-- Dumping structure for table test1.hibernate_sequence
+DROP TABLE IF EXISTS `hibernate_sequence`;
+CREATE TABLE IF NOT EXISTS `hibernate_sequence` (
+  `next_val` bigint DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Dumping data for table test1.hibernate_sequence: 1 rows
+DELETE FROM `hibernate_sequence`;
+/*!40000 ALTER TABLE `hibernate_sequence` DISABLE KEYS */;
+INSERT INTO `hibernate_sequence` (`next_val`) VALUES
+	(1);
+/*!40000 ALTER TABLE `hibernate_sequence` ENABLE KEYS */;
+
+-- Dumping structure for table test1.role
+DROP TABLE IF EXISTS `role`;
+CREATE TABLE IF NOT EXISTS `role` (
+  `role_id` int NOT NULL,
+  `role` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`role_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Dumping data for table test1.role: 0 rows
+DELETE FROM `role`;
+/*!40000 ALTER TABLE `role` DISABLE KEYS */;
+/*!40000 ALTER TABLE `role` ENABLE KEYS */;
+
+-- Dumping structure for table test1.user
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE IF NOT EXISTS `user` (
+  `user_id` int NOT NULL,
+  `active` bit(1) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `tenant` varchar(255) DEFAULT NULL,
+  `username` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`user_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Dumping data for table test1.user: 1 rows
+DELETE FROM `user`;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` (`user_id`, `active`, `password`, `tenant`, `username`) VALUES
+	(1, b'1', '$2a$12$v5mWgwB9C6i5lVJyV1dhNOyVVQUM3l7qr56NgmVBcTyiKRjIRV3D2', 'test1', 'sagar');
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+
+-- Dumping structure for table test1.user_role
+DROP TABLE IF EXISTS `user_role`;
+CREATE TABLE IF NOT EXISTS `user_role` (
+  `user_id` int NOT NULL,
+  `role_id` int NOT NULL,
+  PRIMARY KEY (`user_id`,`role_id`),
+  KEY `FKa68196081fvovjhkek5m97n3y` (`role_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Dumping data for table test1.user_role: 0 rows
+DELETE FROM `user_role`;
+/*!40000 ALTER TABLE `user_role` DISABLE KEYS */;
+/*!40000 ALTER TABLE `user_role` ENABLE KEYS */;
+
+
+-- Dumping database structure for test2
+DROP DATABASE IF EXISTS `test2`;
+CREATE DATABASE IF NOT EXISTS `test2` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `test2`;
+
+-- Dumping structure for table test2.city
+DROP TABLE IF EXISTS `city`;
+CREATE TABLE IF NOT EXISTS `city` (
+  `id` bigint DEFAULT NULL,
+  `name` varchar(200) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Dumping data for table test2.city: ~0 rows (approximately)
+DELETE FROM `city`;
+
+-- Dumping structure for table test2.hibernate_sequence
+DROP TABLE IF EXISTS `hibernate_sequence`;
+CREATE TABLE IF NOT EXISTS `hibernate_sequence` (
+  `next_val` bigint DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Dumping data for table test2.hibernate_sequence: 1 rows
+DELETE FROM `hibernate_sequence`;
+/*!40000 ALTER TABLE `hibernate_sequence` DISABLE KEYS */;
+INSERT INTO `hibernate_sequence` (`next_val`) VALUES
+	(1);
+/*!40000 ALTER TABLE `hibernate_sequence` ENABLE KEYS */;
+
+-- Dumping structure for table test2.role
+DROP TABLE IF EXISTS `role`;
+CREATE TABLE IF NOT EXISTS `role` (
+  `role_id` int NOT NULL,
+  `role` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`role_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Dumping data for table test2.role: 0 rows
+DELETE FROM `role`;
+/*!40000 ALTER TABLE `role` DISABLE KEYS */;
+/*!40000 ALTER TABLE `role` ENABLE KEYS */;
+
+-- Dumping structure for table test2.user
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE IF NOT EXISTS `user` (
+  `user_id` int NOT NULL,
+  `active` bit(1) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `tenant` varchar(255) DEFAULT NULL,
+  `username` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`user_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Dumping data for table test2.user: 1 rows
+DELETE FROM `user`;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` (`user_id`, `active`, `password`, `tenant`, `username`) VALUES
+	(1, b'1', '$2a$12$v5mWgwB9C6i5lVJyV1dhNOyVVQUM3l7qr56NgmVBcTyiKRjIRV3D2', 'test2', 'varade');
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+
+-- Dumping structure for table test2.user_role
+DROP TABLE IF EXISTS `user_role`;
+CREATE TABLE IF NOT EXISTS `user_role` (
+  `user_id` int NOT NULL,
+  `role_id` int NOT NULL,
+  PRIMARY KEY (`user_id`,`role_id`),
+  KEY `FKa68196081fvovjhkek5m97n3y` (`role_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Dumping data for table test2.user_role: 0 rows
+DELETE FROM `user_role`;
+/*!40000 ALTER TABLE `user_role` DISABLE KEYS */;
+/*!40000 ALTER TABLE `user_role` ENABLE KEYS */;
+
+
+-- Dumping database structure for test3
+DROP DATABASE IF EXISTS `test3`;
+CREATE DATABASE IF NOT EXISTS `test3` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `test3`;
+
+-- Dumping structure for table test3.role
+DROP TABLE IF EXISTS `role`;
+CREATE TABLE IF NOT EXISTS `role` (
+  `role_id` int NOT NULL,
+  `role` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Dumping data for table test3.role: ~0 rows (approximately)
+DELETE FROM `role`;
+
+-- Dumping structure for table test3.user
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE IF NOT EXISTS `user` (
+  `user_id` int NOT NULL,
+  `active` bit(1) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `tenant` varchar(255) DEFAULT NULL,
+  `username` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Dumping data for table test3.user: ~2 rows (approximately)
+DELETE FROM `user`;
+INSERT INTO `user` (`user_id`, `active`, `password`, `tenant`, `username`) VALUES
+	(1, b'1', '$2a$12$v5mWgwB9C6i5lVJyV1dhNOyVVQUM3l7qr56NgmVBcTyiKRjIRV3D2', 'test2', 'svarade'),
+	(2, b'1', '$2a$12$v5mWgwB9C6i5lVJyV1dhNOyVVQUM3l7qr56NgmVBcTyiKRjIRV3D2', 'test3', 'sddddd');
+
+-- Dumping structure for table test3.user_role
+DROP TABLE IF EXISTS `user_role`;
+CREATE TABLE IF NOT EXISTS `user_role` (
+  `user_id` int NOT NULL,
+  `role_id` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Dumping data for table test3.user_role: ~0 rows (approximately)
+DELETE FROM `user_role`;
+
+/*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;
